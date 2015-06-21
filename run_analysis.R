@@ -12,24 +12,20 @@ ydata <- rbind(read.table("UCI HAR Dataset/train/y_train.txt"),
 features <- read.table("UCI HAR Dataset/features.txt")
 indices <- grep("-mean\\(\\)|-std\\(\\)", features[, 2])
 xdata <- xdata[, indices]
-names(xdata) <- tolower(features[indices, 2])
-names(xdata) <- gsub("-std\\(\\)", "-std", names(xdata))
+names(xdata) <- gsub("-std\\(\\)", "-std", features[indices, 2])
 names(xdata) <- gsub("-mean\\(\\)", "-mean", names(xdata))
 
 # Uses descriptive activity names to name the activities in the data set
 
 actlabels <- read.table("UCI HAR Dataset/activity_labels.txt")
-actlabels[, 2] = tolower(as.character(actlabels[, 2]))
 
 names(ydata) <- "activity"
 ydata[, 1] = actlabels[ydata[, 1], 2]
-
 
 # Appropriately labels the data set with descriptive variable names. 
 
 names(subject) <- "subject"
 mergedata <- cbind(subject, ydata, xdata)
-write.table(mergedata, "merged_data.txt")
 
 # creates a second, independent tidy data set with the average of each variable for each activity and each subject
 
