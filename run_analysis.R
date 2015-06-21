@@ -55,5 +55,5 @@ for (s in 1:num_subjects) {
     n = n + 1
   }
 }
-write.table(r, "2nd_data_set.txt")
 
+write.table(r, "2nd_data_set.txt", row.name=FALSE)
